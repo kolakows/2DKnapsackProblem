@@ -112,11 +112,20 @@ namespace StealingStuff
                         else
                         {
                             Status[i] = ItemStatus.DoesntFit;
+                            for (int j = i+1; j < Items.Count; j++)
+                                Status[j] = ItemStatus.DoesntFit;
                             return false;
                         }
                 }
             }
             return true;
+        }
+
+        public bool BackpackCannotFit()
+        {
+            if (Items.Count == 0)
+                return false;
+            return Status[Items.Count - 1] == ItemStatus.DoesntFit;
         }
 
         private void TakeItemOff(int ind)

@@ -34,6 +34,8 @@ namespace StealingStuff
         {
             if (current.TotalItemsArea > current.Area) //na pewno nie da się zapakować
                 return;
+            if (current.BackpackCannotFit())
+                return;
             if(current.TotalValue > best.TotalValue)
             {
                 if (current.FeasibilityCheck())
@@ -55,6 +57,8 @@ namespace StealingStuff
                             current.Add(allItems[r], i, j, k == 1);
                             StealSomeMore(current, best, allItems);
                             current.Pop();
+                            if (current.BackpackCannotFit())
+                                return;
                         }
                     }
                 }
